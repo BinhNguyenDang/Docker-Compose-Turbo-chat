@@ -1,18 +1,26 @@
 Rails.application.routes.draw do
+  # Define resources for rooms and nested resources for messages
   resources :rooms do 
     resources :messages
   end
+  
+  # Define the root path route to point to the 'home' action of the 'pages' controller
   root 'pages#home'
+  
+  # Define routes for Devise authentication
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  # Define a route for users to access the sign-in page
   devise_scope :user do
-    get 'users', to: 'devise/session#new'
+    get 'users', to: 'devise/sessions#new'
   end
+  
+  # Define a route for accessing user profiles
   get 'user/:id', to: 'users#show', as: 'user'
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  
+  # Route to reveal the health status of the application
   get "up" => "rails/health#show", as: :rails_health_check
-
+  
   # Defines the root path route ("/")
   # root "posts#index"
 end
