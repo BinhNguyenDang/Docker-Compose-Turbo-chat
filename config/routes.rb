@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   # Define resources for rooms and nested resources for messages
   resources :rooms do 
     resources :messages
