@@ -11,12 +11,15 @@ class Room < ApplicationRecord
     # Establishes an association: a room has many messages
     has_many :messages
 
+     # Establishes an association: a room has many participants
     has_many :participants, dependent: :destroy
 
+    # Method to broadcast a message after a new room is created if it's public
     def broadcast_if_public
       broadcast_append_to "rooms" unless self.is_private
     end
 
+    # Method to create a private room and add participants
     def self.create_private_room(users, room_name)
       single_room = Room.create(name: room_name, is_private: true)
       users.each do |user|
@@ -24,5 +27,7 @@ class Room < ApplicationRecord
       end
       return single_room
     end
-  end
+
+
+end
   

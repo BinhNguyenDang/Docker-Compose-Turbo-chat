@@ -10,11 +10,18 @@ class Message < ApplicationRecord
   #By calling self.room, it retrieves the associated room record.
   after_create_commit { broadcast_append_to self.room }
 
+  # Before creating a new room, confirm the participant
   before_create :confirm_participant
 
+  # Method to confirm if the participant is allowed to create the room
   def confirm_participant
-      return unless room.is_private
-      is_participant = Participant.where(user_id: self.user.id, room_id: self.room.id).first
-      throw :abort unless is_participant
+    # Check if the room is private
+    return unless room.is_private
+
+    # Check if the user creating the room is a participant
+    is_participant = Participant.where(user_id: self.user.id, room_id: self.room.id).first
+
+    # Abort room creation if the user is not a participant
+    throw :abort unless is_participant
   end
 end
