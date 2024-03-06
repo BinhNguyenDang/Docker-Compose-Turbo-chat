@@ -21,4 +21,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* 3/6/2024 Fixed Local Disk on first repo corrupted, changing repo and reset sqlite database.
