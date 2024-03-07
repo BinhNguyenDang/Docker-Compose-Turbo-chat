@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   # Ensure that the user is authenticated before executing any action
   before_action :authenticate_user!
+  before_action :set_status
   
   def index
     # Initialize a new instance of the Room model
@@ -43,5 +44,12 @@ class RoomsController < ApplicationController
     
     # Print the @room object to the console for debugging
     puts @room.inspect
+  end
+
+
+  private
+
+  def set_status
+    current_user.update!(status: User.statuses[:online]) if current_user
   end
 end
