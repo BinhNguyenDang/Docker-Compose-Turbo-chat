@@ -27,7 +27,7 @@ class Room < ApplicationRecord
       end
       return single_room
     end
-
+    # Checks if a user is a participant in a room.
     def participant?(room, user)
       room.participants.where(user: user).exists?
     end

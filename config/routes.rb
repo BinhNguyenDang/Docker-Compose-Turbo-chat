@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # Define the root path route to point to the 'home' action of the 'pages' controller
   root 'pages#home'
   
+  # Configure Devise routes and controllers for user authentication
+  # The controllers option allows you to customize which controllers Devise should use for specific authentication actions.
+  # For Example, the sessions controller, authentication-related actions like signing in and signing out are handled. Here, it's specified that the users/sessions controller should be used.
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: "users/registrations"
