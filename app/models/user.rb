@@ -4,14 +4,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   # Define a scope to fetch all users except the current user
-  scope :all_except, -> (user) { where.not(id: user)}
+  scope :all_except, ->(user) { where.not(id: user)}
   
   # Define a callback to broadcast a message after a user is created
   # Show new user tab bar once a users is sign up in real time
   # append to "users" in div with users id in the index.html.erb
   after_create_commit { broadcast_append_to "users" }
   # Define a callback to broadcast an update after a user is created (def function below)
-  after_create_commit { broadcast_update }
+  after_update_commit :broadcast_status_update, if: :saved_change_to_status?
   # Define association: a user has many messages
   has_many :messages
   # Define an Active Storage attachment for user avatars
@@ -33,8 +33,13 @@ class User < ApplicationRecord
   end
 
   # Broadcasts an update to the user's status
-  def broadcast_update
-    broadcast_replace_to 'user_status', partial: "users/status", user: self
+  def broadcast_status_update
+    Turbo::StreamsChannel.broadcast_replace_to(
+      "user_status:#{self.id}",
+      target: "user_status_#{self.id}",
+      partial: "users/status",
+      locals: { user: self }
+    )
   end
    # Maps user status to corresponding CSS class for styling
   def status_to_css
