@@ -17,6 +17,7 @@ class User < ApplicationRecord
   # Define an Active Storage attachment for user avatars
   has_one_attached :avatar
   # Define an enumeration for user status with three possible values: offline, away, and online
+  # Rails creates a method called statuses on the User model, which returns a hash-like object. This object maps each enum value (e.g., :offline, :away, :online) to its corresponding integer value.
   enum status: %i[offline away online]
 
   # Define a callback to add a default avatar (if none is attached) after a user is created or updated
@@ -42,7 +43,7 @@ class User < ApplicationRecord
       'bg-success'
     when 'away'
       'bg-warning'
-    when 'offine'
+    when 'offline'
       'bg-dark'
     else
       'bg-dark'

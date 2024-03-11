@@ -11,6 +11,9 @@ module Turbochat
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
+    # After Rails initialization, set the status of all users to "offline".
+    # This ensures that all users start with an initial status when the application starts.
+    # The status value is retrieved from the User model's statuses enum.
     config.after_initialize do |_config|
       User.update_all(status: User.statuses[:offline])
     end
