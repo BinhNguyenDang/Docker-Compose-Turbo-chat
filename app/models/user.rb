@@ -6,6 +6,8 @@ class User < ApplicationRecord
   # Define a scope to fetch all users except the current user
   scope :all_except, ->(user) { where.not(id: user)}
   
+
+  has_one_attached :avatar
   # Define a callback to broadcast a message after a user is created
   # Show new user tab bar once a users is sign up in real time
   # append to "users" in div with users id in the index.html.erb
@@ -15,7 +17,7 @@ class User < ApplicationRecord
   # Define association: a user has many messages
   has_many :messages
   # Define an Active Storage attachment for user avatars
-  has_one_attached :avatar
+  
   # Define an enumeration for user status with three possible values: offline, away, and online
   # Rails creates a method called statuses on the User model, which returns a hash-like object. This object maps each enum value (e.g., :offline, :away, :online) to its corresponding integer value.
   enum status: %i[offline away online]
