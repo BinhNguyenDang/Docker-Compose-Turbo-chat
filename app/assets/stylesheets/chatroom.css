@@ -15,7 +15,7 @@
   #attachment-previews {
     position: absolute;
     display: inline;
-    bottom: 120px;
+    bottom: 40px;
     height: 70px;
     width: 290px;
     overflow-y: hidden;
@@ -70,7 +70,8 @@
   }
   /* width */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 15px;
+    height: 10px;
   }
   
   /* Track */
