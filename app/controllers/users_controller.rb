@@ -21,7 +21,11 @@ class UsersController < ApplicationController
     @message = Message.new
     
     # Fetch messages for the single room, ordered by creation time
-    @messages = @single_room.messages.order(created_at: :asc)
+    # @messages = @single_room.messages.order(created_at: :asc)
+
+    pagy_messages = @single_room.messages.order(created_at: :desc)
+    @pagy, messages = pagy(pagy_messages, items: 10)
+    @messages = messages.reverse
     
     # Render the 'rooms/index' template
     render 'rooms/index'

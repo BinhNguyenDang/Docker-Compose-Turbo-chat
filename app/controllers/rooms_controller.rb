@@ -29,7 +29,11 @@ class RoomsController < ApplicationController
     @message = Message.new
     
     # Fetch messages associated with the single room
-    @messages = @single_room.messages.order(created_at: :asc)
+    # @messages = @single_room.messages.order(created_at: :asc)
+    pagy_messages = @single_room.messages.order(created_at: :desc)
+    @pagy, messages = pagy(pagy_messages, items: 10)
+    @messages = messages.reverse
+    
     
     # Fetch all users except the current user
     @users = User.all_except(current_user)
