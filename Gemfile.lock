@@ -103,6 +103,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-bootstrap-views (1.1.0)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -263,6 +264,7 @@ DEPENDENCIES
   bootsnap
   capybara
   devise (~> 4.9)
+  devise-bootstrap-views (~> 1.0)
   hirb
   image_processing (~> 1.2)
   importmap-rails

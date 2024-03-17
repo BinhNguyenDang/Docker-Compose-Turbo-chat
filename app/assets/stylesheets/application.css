@@ -22,6 +22,15 @@
   padding: 10px;
 }
 
+
+#jumbotron{
+  background: linear-gradient(to right, #343a40, #000000);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+}
+
 #single_room {
   height: calc(100vh - 150px);
 }
