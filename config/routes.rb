@@ -2,7 +2,15 @@ Rails.application.routes.draw do
   # Define resources for rooms and nested resources for messages
   resources :rooms do 
     resources :messages
+    collection do
+      post :search
+    end
   end
+
+  # leave_room_path(room)
+  get 'rooms/leave/:id', to: 'rooms#leave', as: 'leave_room'
+  # join_room_path(room)
+  get 'rooms/join/:id', to: 'rooms#join', as: 'join_room'
   
   # Define the root path route to point to the 'home' action of the 'pages' controller
   root 'pages#home'

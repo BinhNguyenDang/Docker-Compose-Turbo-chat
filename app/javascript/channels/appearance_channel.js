@@ -99,7 +99,9 @@ consumer.subscriptions.create("AppearanceChannel", {
       clearTimeout(timer);
       const timeInSecond = 5;
       const milliseconds = 1000;
-      const timeInMilliseconds = timeInSecond * milliseconds;
+      const timeInMinutes = timeInSecond *60 * milliseconds;
+      const numerOfMinutes = 5;
+      const timeInMilliseconds = timeInMinutes * numerOfMinutes; 
 
       timer = setTimeout(this.away.bind(this), timeInMilliseconds);
     }

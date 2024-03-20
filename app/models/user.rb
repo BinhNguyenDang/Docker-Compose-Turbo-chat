@@ -20,11 +20,18 @@ class User < ApplicationRecord
   after_update_commit :broadcast_status_update, if: :saved_change_to_status?
   # Define association: a user has many messages
   has_many :messages
+
+  has_many :joinables, dependent: :destroy
+  
+  has_many :joined_rooms, through: :joinables, source: :room
+
+  enum role: %i[user admin]
  
   # Define an enumeration for user status with three possible values: offline, away, and online
   # Rails creates a method called statuses on the User model, which returns a hash-like object. This object maps each enum value (e.g., :offline, :away, :online) to its corresponding integer value.
   enum status: %i[offline away online]
 
+  after_initialize :set_default_role, if: :new_record?
   
   # Generates a resized thumbnail of the user's avatar
   def avatar_thumbnail
@@ -44,6 +51,11 @@ class User < ApplicationRecord
       locals: { user: self }
     )
   end
+
+  def has_joined_room(room)
+    joined_rooms.include?(room)
+  end
+
    # Maps user status to corresponding CSS class for styling
   def status_to_css
     case status
@@ -68,6 +80,10 @@ class User < ApplicationRecord
         filename: 'default_profile.jpg',
         content_type: 'image/jpg'
       )
+  end
+
+  def set_default_role
+    self.role ||= :user
   end
 end
 

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include RoomsHelper
   def show
     # Find the user by ID
     @user = User.find(params[:id])
@@ -8,10 +9,14 @@ class UsersController < ApplicationController
 
     # Initialize a new room
     @room = Room.new
+
+    @joined_rooms = current_user.joined_rooms
     
     # Fetch public rooms (custom scope in room.rb)
-    @rooms = Room.public_rooms
+    # @rooms = Room.public_rooms
     
+    @rooms = search_rooms
+
     # Generate or find the private room between current user and the user whose profile is being viewed
     @room_name = get_name(@user, current_user)
     # Find a room with the specified name in the database, or create a new private room (function in room.rb) if it doesn't exist
@@ -23,7 +28,7 @@ class UsersController < ApplicationController
     # Fetch messages for the single room, ordered by creation time
     # @messages = @single_room.messages.order(created_at: :asc)
 
-    pagy_messages = @single_room.messages.order(created_at: :desc)
+    pagy_messages = @single_room.messages.includes(:user).order(created_at: :desc)
     @pagy, messages = pagy(pagy_messages, items: 10)
     @messages = messages.reverse
     
