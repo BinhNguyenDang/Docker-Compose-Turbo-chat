@@ -6,7 +6,7 @@ class Room < ApplicationRecord
     scope :public_rooms, -> { where(is_private: false) }
     
     # Sets up a callback to broadcast a message after a new room is created
-    # after_create_commit { broadcast_if_public }
+    after_update_commit { broadcast_if_public }
     
     # Establishes an association: a room has many messages
     has_many :messages
