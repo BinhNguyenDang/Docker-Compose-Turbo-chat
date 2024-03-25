@@ -46,7 +46,12 @@ rails credentials:edit
 ```
 This will open the credentials file in your default editor.
 
-7. Update the `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD` values for the development, test, and production environments according to your database setup within the credentials file.
+ Open the encrypted credentials file by running the following command in your terminal:
+
+   ```bash
+   EDITOR="code --wait" rails credentials:edit
+```
+7. Update the `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD` values for the development, test, and production environments in the credentials file with this structure.
 
 ## Database Credentials
 
@@ -72,7 +77,7 @@ Then, launch the PostgreSQL command line interface:
 ```yaml
 psql
 ```
-Within the PostgreSQL command line interface, create the required databases for turbo_dev1 and turbo_test1:
+Within the PostgreSQL command line interface, create the required databases for turbo_dev1 and turbo_test1 (depending on your credentials edit):
 ```yaml
 CREATE user turbo_dev1 WITH PASSWORD 'password123';
 CREATE user turbo_test1 WITH PASSWORD 'password123';
