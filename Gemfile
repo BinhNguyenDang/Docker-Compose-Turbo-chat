@@ -68,9 +68,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
+# Authentication gem
 gem "devise", "~> 4.9"
 
 gem 'devise-bootstrap-views', '~> 1.0'
-
+# Pagination gem
 gem "pagy", "~> 6.5"

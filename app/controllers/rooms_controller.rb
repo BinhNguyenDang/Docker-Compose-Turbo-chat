@@ -38,8 +38,13 @@ include RoomsHelper
     
     # Fetch messages associated with the single room
     # @messages = @single_room.messages.order(created_at: :asc)
+
+    # Fetch messages belonging to a single room, including associated users and ordering them by creation time in descending order
     pagy_messages = @single_room.messages.includes(:user).order(created_at: :desc)
+    # Paginate the fetched messages, displaying 10 messages per page, and store pagination metadata in @pagy
+    # The paginated messages for the current page are stored in the variable `messages`
     @pagy, messages = pagy(pagy_messages, items: 10)
+    # Reverse the order of messages to display the most recent messages at the top
     @messages = messages.reverse
     
     

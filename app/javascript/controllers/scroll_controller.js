@@ -3,7 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     initialize() {
         console.log("Initialized");
+        // Get the messages container element
         this.messages = document.getElementById("messages");
+        // Reset scroll position to the bottom of the messages container
         this.resetScrollWithoutThreshold(this.messages);
     }
     /** On start */
@@ -31,15 +33,17 @@ export default class extends Controller {
         // Disconnect the observer when the controller is disconnected
         this.observer.disconnect();
     }
-    /**Custom function */
+    /** Custom function to reset scroll position */
     resetScroll(){
         const bottomOfScroll = this.messages.scrollHeight - this.messages.clientHeight;
+        // if the user's scroll position is above this threshold (200 pixels), the controller will not automatically scroll to the bottom.
         const upperScrollThreshold = bottomOfScroll - 200;
         // Scroll down if we're not within the threshold
         if (this.messages.scrollTop > upperScrollThreshold){
             this.messages.scrollTop = this.messages.scrollHeight - this.messages.clientHeight;
         }
     }
+    /** Function to reset scroll position without considering a threshold */
     resetScrollWithoutThreshold(messages){
         messages.scrollTop = messages.scrollHeight - messages.clientHeight;
     }

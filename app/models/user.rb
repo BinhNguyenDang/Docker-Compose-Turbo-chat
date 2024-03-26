@@ -16,7 +16,9 @@ class User < ApplicationRecord
   # Show new user tab bar once a users is sign up in real time
   # append to "users" in div with users id in the index.html.erb
   after_create_commit { broadcast_append_to "users" }
-  # Define a callback to broadcast an update after a user is created (def function below)
+
+  # Define a callback to broadcast a status update after a user's status is updated
+  # This callback broadcasts a status update after a user's status is updated, used for real-time status updates.
   after_update_commit :broadcast_status_update, if: :saved_change_to_status?
   # Define association: a user has many messages
   has_many :messages
@@ -42,7 +44,7 @@ class User < ApplicationRecord
     avatar.variant(resize_to_limit: [50,50]).processed
   end
 
-  # Broadcasts an update to the user's status
+  # Broadcasts an update to the user's status/ realtime update to users/status partial
   def broadcast_status_update
     Turbo::StreamsChannel.broadcast_replace_to(
       "user_status:#{self.id}",
