@@ -23,16 +23,21 @@ class User < ApplicationRecord
   # Define association: a user has many messages
   has_many :messages
 
+  # Define association: a user has many joinables
   has_many :joinables, dependent: :destroy
   
+  # Define enumeration for user roles: user, admin
   has_many :joined_rooms, through: :joinables, source: :room
 
+   # Define enumeration for user roles: user, admin
   enum role: %i[user admin]
  
   # Define an enumeration for user status with three possible values: offline, away, and online
   # Rails creates a method called statuses on the User model, which returns a hash-like object. This object maps each enum value (e.g., :offline, :away, :online) to its corresponding integer value.
   enum status: %i[offline away online]
 
+  # This line sets up a callback to ensure that whenever a new instance of the User model is initialized,
+  # the set_default_role method is called to assign a default role to the user if one is not already assigned.
   after_initialize :set_default_role, if: :new_record?
   
   # Generates a resized thumbnail of the user's avatar
@@ -54,6 +59,7 @@ class User < ApplicationRecord
     )
   end
 
+  # Checks if the user has joined a specific room
   def has_joined_room(room)
     joined_rooms.include?(room)
   end
@@ -83,7 +89,7 @@ class User < ApplicationRecord
         content_type: 'image/jpg'
       )
   end
-
+   # Sets a default role for a new user
   def set_default_role
     self.role ||= :user
   end

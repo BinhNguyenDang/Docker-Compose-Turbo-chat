@@ -100,6 +100,7 @@ consumer.subscriptions.create("AppearanceChannel", {
       const timeInSecond = 5;
       const milliseconds = 1000;
       const timeInMinutes = timeInSecond *60 * milliseconds;
+      // Number of minutes to be delayed
       const numerOfMinutes = 5;
       const timeInMilliseconds = timeInMinutes * numerOfMinutes; 
 

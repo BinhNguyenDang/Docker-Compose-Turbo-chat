@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # Define resources for rooms and nested resources for messages
   resources :rooms do 
     resources :messages
+    # Custom collection route for searching rooms
     collection do
       post :search
     end
