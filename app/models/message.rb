@@ -8,7 +8,10 @@ class Message < ApplicationRecord
   # Defines a callback to broadcast a message after a new message is created
   #self.room: This refers to the room associated with the message that triggered the callback. 
   #By calling self.room, it retrieves the associated room record.
-  after_create_commit { broadcast_append_to self.room }
+  after_create_commit do
+    update_parent_room
+    broadcast_append_to self.room 
+  end
 
   # Before creating a new room, confirm the participant
   before_create :confirm_participant
@@ -35,5 +38,9 @@ class Message < ApplicationRecord
 
     # Abort room creation if the user is not a participant
     throw :abort unless is_participant
+  end
+
+  def update_parent_room
+    room.update(last_message_at: Time.now)
   end
 end

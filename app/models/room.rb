@@ -22,7 +22,8 @@ class Room < ApplicationRecord
 
     # Method to broadcast a message after a new room is created if it's public
     def broadcast_if_public
-      broadcast_append_to "rooms" unless self.is_private
+      return if is_private
+      broadcast_latest_message 
     end
 
     # Method to create a private room and add participants
@@ -36,6 +37,27 @@ class Room < ApplicationRecord
     # Checks if a user is a participant in a room.
     def participant?(room, user)
       room.participants.where(user: user).exists?
+    end
+
+    def latest_message
+      messages.includes(:user).order(created_at: :desc).first
+    end
+
+    def broadcast_latest_message
+      last_message = latest_message
+
+      return unless last_message
+
+      target = "room_#{id} last_message"
+
+      broadcast_update_to('rooms',
+                          target: target,
+                          partial: 'rooms/last_message',
+                          locals: {
+                            room: self,
+                            user: last_message.user,
+                            last_message: last_message
+                          })
     end
 end
   
