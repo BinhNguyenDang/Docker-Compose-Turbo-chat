@@ -22,6 +22,7 @@ class Room < ApplicationRecord
 
     # Method to broadcast a message after a new room is created if it's public
     def broadcast_if_public
+      Rails.logger.info "Broadcasting latest message for room: #{id}"
       return if is_private
       broadcast_latest_message 
     end
@@ -48,10 +49,9 @@ class Room < ApplicationRecord
 
       return unless last_message
 
-      target = "room_#{id} last_message"
 
-      broadcast_update_to('rooms',
-                          target: target,
+      Turbo::StreamsChannel.broadcast_replace_to("rooms",
+                          target: "rooms_#{self.id}_last_message",
                           partial: 'rooms/last_message',
                           locals: {
                             room: self,

@@ -37,7 +37,7 @@ export default class extends Controller {
     resetScroll(){
         const bottomOfScroll = this.messages.scrollHeight - this.messages.clientHeight;
         // if the user's scroll position is above this threshold (200 pixels), the controller will not automatically scroll to the bottom.
-        const upperScrollThreshold = bottomOfScroll - 200;
+        const upperScrollThreshold = bottomOfScroll - 1000;
         // Scroll down if we're not within the threshold
         if (this.messages.scrollTop > upperScrollThreshold){
             this.messages.scrollTop = this.messages.scrollHeight - this.messages.clientHeight;
