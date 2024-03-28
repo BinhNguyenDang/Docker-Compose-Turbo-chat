@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
    # Installing pagy  
   include Pagy::Backend
     before_action :turbo_frame_request_variant
+    before_action :set_current_user
   
     private
     # The turbo frame variant is used to optimize performance for requests made with Turbo Frame,
@@ -14,5 +15,10 @@ class ApplicationController < ActionController::Base
     def turbo_frame_request_variant
       request.variant = :turbo_frame if turbo_frame_request?
     end
+
+    def set_current_user
+      Current.user = current_user
+    end
+    
   end
   

@@ -11,6 +11,8 @@ include RoomsHelper
     # Retrieve rooms that the current user has joined
     @joined_rooms = current_user.joined_rooms.order("last_message_at DESC")
 
+    current_user.update(current_room: nil)
+
     # Retrieve public rooms using the public_rooms scope (definition in room.rb)
     # @rooms = Room.public_rooms
 
@@ -39,6 +41,9 @@ include RoomsHelper
 
     # Retrieve rooms that the current user has joined
     @joined_rooms = current_user.joined_rooms.order("last_message_at DESC")
+
+    current_user.update(current_room: @single_room)
+
 
     
     # Initialize a new instance of the Message model

@@ -12,5 +12,12 @@ module RoomsHelper
         []
       end
     end
+
+    # Method to generate a unique private room name based on two users' IDs
+    # EXAMPLE : private_1_2 (room for user_id 1 and user_id 2)
+    def get_name(user1, user2)
+      user = [user1, user2].sort
+      "private_#{user[0].id}_#{user[1].id}"
+    end
   end
   
