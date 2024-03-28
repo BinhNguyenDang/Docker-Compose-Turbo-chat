@@ -17,7 +17,7 @@
         <%= link_to user.email, user, class:'ms-2 me-auto username', data: {turbo: "false"}%>
       </div>
     </div>
-    <%= turbo_frame_tag "rooms_#{room.id}_user_last_message" do %>
+    <%= turbo_frame_tag "room_#{room.id}_user_last_message" do %>
       <%= render "users/last_message", 
         last_message: last_message, 
         sender: sender %>

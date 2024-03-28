@@ -22,8 +22,8 @@ class Room < ApplicationRecord
 
     # Method to broadcast a message after a new room is created if it's public
     def broadcast_if_public
-      Rails.logger.info "Broadcasting latest message for room: #{id}"
-      return if is_private
+      # Rails.logger.info "Broadcasting latest message for room: #{id}"
+      # return if is_private
       broadcast_latest_message 
     end
 
@@ -46,29 +46,28 @@ class Room < ApplicationRecord
 
     def broadcast_latest_message
       last_message = latest_message
-
       return unless last_message
-
-      user_target = "room_#{id}_user_last_message"
+  
+      # Assuming Current.user is set correctly in your application context
       sender = Current.user.eql?(last_message.user) ? Current.user : last_message.user
-
-      Turbo::StreamsChannel.broadcast_replace_to("rooms",
-                          target: "rooms_#{self.id}_last_message",
-                          partial: 'rooms/last_message',
-                          locals: {
-                            room: self,
-                            user: last_message.user,
-                            last_message: last_message
-                          })
-      Turbo::StreamsChannel.broadcast_update_to("rooms",
-                          target: user_target,
-                          partial: 'users/last_message',
-                          locals: {
-                            room: self,
-                            user: last_message.user,
-                            last_message: last_message,
-                            sender: sender
-                          })
+  
+      # Broadcast to a general room update stream
+      broadcast_replace_to(
+        "rooms",
+        target: "rooms_#{id}_last_message",
+        partial: 'rooms/last_message',
+        locals: { room: self, user: last_message.user, last_message: last_message }
+      )
+  
+      broadcast_update_to('rooms',
+                        target: "room_#{id}_user_last_message",
+                        partial: 'users/last_message',
+                        locals: {
+                          room: self,
+                          user: last_message.user,
+                          last_message: last_message,
+                          sender: sender
+                        })
     end
 end
   
