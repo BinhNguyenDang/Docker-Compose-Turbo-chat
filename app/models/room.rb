@@ -52,21 +52,23 @@ class Room < ApplicationRecord
       sender = Current.user.eql?(last_message.user) ? Current.user : last_message.user
   
       # Broadcast to a general room update stream
-      broadcast_replace_to(
-        "rooms",
-        target: "rooms_#{id}_last_message",
-        partial: 'rooms/last_message',
-        locals: { room: self, user: last_message.user, last_message: last_message }
-      )
+      broadcast_replace_to("rooms",
+                            target: "rooms_#{id}_last_message",
+                            partial: 'rooms/last_message',
+                            locals: { 
+                              room: self, 
+                              user: last_message.user, 
+                              last_message: last_message 
+                          })
   
       broadcast_update_to('rooms',
-                        target: "room_#{id}_user_last_message",
-                        partial: 'users/last_message',
-                        locals: {
-                          room: self,
-                          user: last_message.user,
-                          last_message: last_message,
-                          sender: sender
+                            target: "room_#{id}_user_last_message",
+                            partial: 'users/last_message',
+                            locals: {
+                              room: self,
+                              user: last_message.user,
+                              last_message: last_message,
+                              sender: sender
                         })
     end
 end
