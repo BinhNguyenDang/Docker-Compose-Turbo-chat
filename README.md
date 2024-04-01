@@ -13,7 +13,7 @@
 
 Before getting started, ensure that you have the following installed:
 
-- Ruby (version 3.0.2)
+- Ruby (version 3.3.0)
 - Rails (version 7.1.3 or higher)
 - PostgreSQL (with appropriate configurations)
 - Yarn
