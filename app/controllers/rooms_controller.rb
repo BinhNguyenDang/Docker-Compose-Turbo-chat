@@ -4,6 +4,7 @@ include RoomsHelper
   before_action :authenticate_user!
   before_action :set_status
   
+  
   def index
     # Initialize a new instance of the Room model
     @rooms = Room.new
@@ -21,6 +22,9 @@ include RoomsHelper
     
     # Fetch all users except the current user, all_except scope ( definition in user.rb)
     @users = User.all_except(current_user)
+
+    # @notifications = current_user.notifications.includes(event: :record)
+    
     
     # Render the 'index' template
     render 'index'
@@ -30,6 +34,9 @@ include RoomsHelper
     # Find the room with the specified ID
     @single_room = Room.find(params[:id])
     
+    # @counter = unread
+    
+    set_notifications_to_read
     # Initialize a new instance of the Room model
     @rooms = Room.new
 
@@ -44,7 +51,7 @@ include RoomsHelper
 
     current_user.update(current_room: @single_room)
 
-
+    
     
     # Initialize a new instance of the Message model
     @message = Message.new
@@ -116,4 +123,23 @@ include RoomsHelper
   def set_status
     current_user.update!(status: User.statuses[:online]) if current_user
   end
+
+  def set_notifications_to_read
+    current_room_id = params[:id].to_i
+    return unless current_room_id.present?
+  
+    # Fetch all unread notifications for the current_user
+    unread_notifications = current_user.notifications.unread
+  
+    unread_notifications.each do |notification|
+      # Check if the notification's associated record (event.record) is the current room
+      if notification.record.id == current_room_id
+        # Mark the notification as read
+        notification.mark_as_read
+      end
+    end
+
+  end
+
+  
 end
