@@ -20,6 +20,10 @@ class Room < ApplicationRecord
     # Establishes an association: a room has many users joined through joinables/ source: :user indicate what model joined_users uses
     has_many :joined_users, through: :joinables, source: :user
 
+    has_many :notification_mentions, as: :record, dependent: :destroy, class_name: "Noticed::Event"
+
+    # has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
+
     # Method to broadcast a message after a new room is created if it's public
     def broadcast_if_public
       # Rails.logger.info "Broadcasting latest message for room: #{id}"
@@ -70,6 +74,14 @@ class Room < ApplicationRecord
                               last_message: last_message,
                               sender: sender
                         })
+    end
+
+    def unread_notifications_count_for_user(user)
+      self.notification_mentions.inject(0) do |count, mention|
+        # For each mention, count notifications that are unread and belong to the user
+        count += mention.notifications.where(recipient: user).unread.count
+        count
+      end
     end
 end
   
