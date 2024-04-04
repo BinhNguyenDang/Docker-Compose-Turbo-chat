@@ -19,5 +19,11 @@ module RoomsHelper
       user = [user1, user2].sort
       "private_#{user[0].id}_#{user[1].id}"
     end
+
+    def unread_notifications_count_for(room, user)
+      # Assuming there's a method to calculate the unread count
+      room.unread_notifications_count_for_user(user)
+    end
+
   end
   

@@ -12,6 +12,7 @@ class Message < ApplicationRecord
     notify_recipients
     update_parent_room
     broadcast_append_to self.room 
+    
   end
 
   # Before creating a new room, confirm the participant
@@ -44,6 +45,7 @@ class Message < ApplicationRecord
   def update_parent_room
     room.update(last_message_at: Time.now)
   end
+
 
   private
   def notify_recipients

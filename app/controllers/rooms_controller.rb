@@ -118,6 +118,7 @@ include RoomsHelper
     redirect_to rooms_path
   end
 
+
   private
   # Set the user's status to 'online' before any action
   def set_status
@@ -127,17 +128,15 @@ include RoomsHelper
   def set_notifications_to_read
     current_room_id = params[:id].to_i
     return unless current_room_id.present?
-  
-    # Fetch all unread notifications for the current_user
-    unread_notifications = current_user.notifications.unread
-  
-    unread_notifications.each do |notification|
-      # Check if the notification's associated record (event.record) is the current room
-      if notification.record.id == current_room_id
-        # Mark the notification as read
-        notification.mark_as_read
-      end
-    end
+    
+    # Fetch all unread notifications for the current_user that are associated with the current room
+    # It leverages the direct relationship between the notification's event (record_id) and the room_id
+    unread_notifications = current_user.notifications.joins(:event)
+                                    .where(noticed_events: { record_id: current_room_id, record_type: 'Room' })
+                                    .unread
+    
+    # Bulk update to mark notifications as read
+    unread_notifications.update_all(read_at: Time.current)
 
   end
 
