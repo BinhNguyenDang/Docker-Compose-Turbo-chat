@@ -12,11 +12,7 @@ class Message < ApplicationRecord
     notify_recipients
     update_parent_room
     broadcast_append_to self.room 
-<<<<<<< HEAD
-    
-=======
     broadcast_to_home_page
->>>>>>> 38bfb89 (Recent Message Activity Stream)
   end
 
   # Before creating a new room, confirm the participant
