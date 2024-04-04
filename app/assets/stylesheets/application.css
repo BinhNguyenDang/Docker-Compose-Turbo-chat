@@ -26,6 +26,7 @@ body {
 }
 
 #jumbotron{
+  animation: fadeIn 1s;
   background: linear-gradient(to right, #343a40, #000000);
   background-position: center center;
   background-repeat: no-repeat;
@@ -34,7 +35,9 @@ body {
 }
 
 #single_room {
+  animation: fadeIn 1s;
   height: calc(100vh - 150px);
+  background-color: #000000;
 }
 #messages {
   height: calc(100vh - 150px);
@@ -49,8 +52,9 @@ body {
   height: calc(100vh - 56px);
   margin-right: 0px !important;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-left: 2em;
+  background-color: #000000;
 }
 #chatroom_container {
   height: calc(100vh - 56px);
@@ -144,4 +148,18 @@ body {
 }
 .new-room-button {
   border-radius: 0px !important;
+}
+#message-preview-card{
+  animation: fadeIn 2s;
+  background: #222; 
+  border-radius:0px;
+  border-top: 200px;
+}
+@keyframes fadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
 }

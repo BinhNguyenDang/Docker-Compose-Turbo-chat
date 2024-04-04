@@ -12,7 +12,11 @@ class Message < ApplicationRecord
     notify_recipients
     update_parent_room
     broadcast_append_to self.room 
+<<<<<<< HEAD
     
+=======
+    broadcast_to_home_page
+>>>>>>> 38bfb89 (Recent Message Activity Stream)
   end
 
   # Before creating a new room, confirm the participant
@@ -55,5 +59,15 @@ class Message < ApplicationRecord
       notification = CommentNotifier.with(record: self.room, message: self)
       notification.deliver(user)
     end
+  end
+
+  def broadcast_to_home_page
+    broadcast_prepend_later_to "public_messages",
+      target: "public_messages",
+      partial: "messages/message_preview",
+      locals: { message: self }
+    message_to_remove = Message.where(room: Room.public_rooms).order(created_at: :desc).limit(10).last
+    
+    broadcast_remove_to 'public_messages', target: message_to_remove
   end
 end
