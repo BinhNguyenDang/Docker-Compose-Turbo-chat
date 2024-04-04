@@ -54,15 +54,14 @@ class Room < ApplicationRecord
   
       # Assuming Current.user is set correctly in your application context
       sender = Current.user.eql?(last_message.user) ? Current.user : last_message.user
-  
       # Broadcast to a general room update stream
-      broadcast_replace_to("rooms",
+      broadcast_update_to("rooms",
                             target: "rooms_#{id}_last_message",
                             partial: 'rooms/last_message',
                             locals: { 
                               room: self, 
                               user: last_message.user, 
-                              last_message: last_message 
+                              last_message: last_message,
                           })
   
       broadcast_update_to('rooms',
@@ -74,14 +73,17 @@ class Room < ApplicationRecord
                               last_message: last_message,
                               sender: sender
                         })
+       
     end
 
+
     def unread_notifications_count_for_user(user)
-      self.notification_mentions.inject(0) do |count, mention|
-        # For each mention, count notifications that are unread and belong to the user
-        count += mention.notifications.where(recipient: user).unread.count
-        count
-      end
+      unread_count = user.notifications.joins(:event)
+      .where(noticed_events: { record_id: id, record_type: 'Room' })
+      .unread
+      .count
+      unread_count
+
     end
 end
   
