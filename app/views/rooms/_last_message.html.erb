@@ -1,6 +1,6 @@
 <% unless last_message.nil? %>
   <div class="row">
-    <div class="col-12 d-flex align-items-center justify-content-between">
+    <div class="col-12 d-flex align-items-center justify-content-between" style="border-bottom: 2px solid black;">
       <em class="last-message"><%= "#{last_message.user.email} sent a message".truncate(40) %></em>
       <%= content_tag(:em, class:"last-message-time", 
       data: {

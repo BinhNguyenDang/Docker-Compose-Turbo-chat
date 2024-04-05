@@ -4,7 +4,7 @@
 <div id="chatroom_container" class="row bg-dark text-light">
   <div id="side_panel" class="col-md-3 col-sm-3">
     <li class="list-group-item d-flex align-items-center justify-content-between user_list_item mt-4">
-      <div class="icon-container mt-4 ">
+      <div class="icon-container ">
         <%= link_to image_tag(current_user.chat_avatar, class: 'chat_pfp'), current_user %>
         <div>
           <%= render "users/status", user: current_user %>

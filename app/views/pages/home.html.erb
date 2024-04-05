@@ -17,6 +17,7 @@
     <% end %>
   </div>
   <div class="col-4 m-4" id="public_messages" style="overflow-x: hidden; overflow-y: auto; max-height: 80vh; padding: 0px; flex: 1;">
+    <h4 class="text-white" style="font-weight: 300;">Latest Public Messages</h4>
     <%= turbo_stream_from "public_messages"%>
     <% @messages.each do |message| %>
        <%= render "messages/message_preview", message: message %>
