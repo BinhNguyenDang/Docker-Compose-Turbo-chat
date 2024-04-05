@@ -49,9 +49,14 @@ class Message < ApplicationRecord
     room.update(last_message_at: Time.now)
   end
 
+  def owned_by_current_user?
+    self.user == Current.user || Current.user.admin? 
+  end
+
 
   private
 
+ 
   def validate_attachment_filetypes
     return unless attachments.attached?
   
