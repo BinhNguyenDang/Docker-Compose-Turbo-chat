@@ -5,7 +5,11 @@ class MessagesController < ApplicationController
       body: msg_params[:body],
       room_id: params[:room_id],
       attachments: msg_params[:attachments]
-    )
+      )
+      unless @message.save
+        render turbo_stream:
+          turbo_stream.update('flash', partial: "shared/message_error", locals: {message: @message.errors.full_messages.join(", ")})
+      end
     end
     
     private

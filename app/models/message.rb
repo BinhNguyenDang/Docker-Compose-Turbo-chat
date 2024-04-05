@@ -5,6 +5,9 @@ class Message < ApplicationRecord
   # Establishes a belongs_to association with the Room model
   belongs_to :room
   has_many_attached :attachments, dependent: :destroy
+
+  validate :validate_attachment_filetypes
+
   # Defines a callback to broadcast a message after a new message is created
   #self.room: This refers to the room associated with the message that triggered the callback. 
   #By calling self.room, it retrieves the associated room record.
@@ -48,6 +51,24 @@ class Message < ApplicationRecord
 
 
   private
+
+  def validate_attachment_filetypes
+    return unless attachments.attached?
+  
+    allowed_content_types = %w[image/jpeg image/png image/gif video/mp4 video/mpeg audio/x-wav audio/mpeg video/quicktime]
+    max_size = 10.megabytes
+  
+    attachments.each do |attachment|
+      unless attachment.content_type.in?(allowed_content_types)
+        errors.add(:attachments, "must be a MOV, JPEG, PNG, GIF, MP4, MP3, OR WAV file")
+      end
+  
+      if attachment.blob.byte_size > max_size
+        errors.add(:attachments, "file size exceeds the maximum allowed (#{max_size / 1.megabyte} MB)")
+      end
+    end
+  end
+  
   def notify_recipients
     users_in_room = room.joined_users
     users_in_room.each do |user|
