@@ -44,7 +44,9 @@
           The rendered content will be inserted into the Turbo Frame with the name "page_handler". -->
           <%= render "messages/pager", pagy: @pagy %>
           <div id="messages-container">
-              <%= render @messages %>
+            <% @messages.each do |message|%>
+              <%= render "messages/message", message: message %>
+            <% end %>
           </div>
         </div>
         <%= render 'layouts/new_message_form' %>
