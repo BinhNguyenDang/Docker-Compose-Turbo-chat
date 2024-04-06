@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   
   # Establishes a belongs_to association with the Room model
   belongs_to :room
-  has_many_attached :attachments, dependent: :destroy
+  has_many_attached :attachments, dependent: :purge_later
 
   validate :validate_attachment_filetypes
 

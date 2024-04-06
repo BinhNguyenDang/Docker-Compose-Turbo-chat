@@ -17,7 +17,8 @@ class MessagesController < ApplicationController
       @room = Room.find(params[:room_id])
       @message = @room.messages.find(params[:id])
       @message.destroy
-      redirect_to @room, notice: 'Message was successfully deleted.'
+      flash[:notice] = "Message deleted "
+      redirect_to @room
     end
 
     def edit
@@ -40,7 +41,8 @@ class MessagesController < ApplicationController
           @message.attachments.attach(new_attachment)
         end
       end
-    
+      
+      flash[:notice] = "Message edited "
       redirect_to @room, notice: 'Message was successfully updated.'
 
     end
