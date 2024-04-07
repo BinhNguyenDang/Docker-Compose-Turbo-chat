@@ -76,3 +76,5 @@ gem 'devise-bootstrap-views', '~> 1.0'
 gem "pagy", "~> 6.5"
 
 gem "noticed", "~> 2.2"
+
+gem "redcarpet", "~> 3.6"

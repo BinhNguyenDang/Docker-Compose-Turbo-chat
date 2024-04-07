@@ -11,7 +11,7 @@
           </div>
         </div>
         <div>
-          <%= message.body %><br>
+          <%= markdown(message.body) %><br>
           <% if message.updated_at > message.created_at + 1.minute %>
             (edited)
           <% end%>

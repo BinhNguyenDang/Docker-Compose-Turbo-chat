@@ -25,5 +25,16 @@ module RoomsHelper
       room.unread_notifications_count_for_user(user)
     end
 
+    def markdown(text)
+      options = {
+        hard_wrap: true,
+        link_attributes: {rel: 'nofollow'},
+        fenced_code_blocks: true,
+        no_intra_emphasis: true,
+        autolink: true,
+      }
+      markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
+      sanitize(markdown.render(text))
+    end
   end
   
