@@ -88,8 +88,10 @@ class Message < ApplicationRecord
       target: "public_messages",
       partial: "messages/message_preview",
       locals: { message: self }
-    message_to_remove = Message.where(room: Room.public_rooms).order(created_at: :desc).limit(10).last
-    
-    broadcast_remove_to 'public_messages', target: message_to_remove
+    messages_count = Message.where(room: Room.public_rooms).count
+    if messages_count >= 10
+      message_to_remove = Message.where(room: Room.public_rooms).order(created_at: :desc).limit(10).last
+      broadcast_remove_to 'public_messages', target: message_to_remove
+    end
   end
 end
