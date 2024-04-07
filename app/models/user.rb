@@ -29,6 +29,9 @@ class User < ApplicationRecord
   # Define enumeration for user roles: user, admin
   has_many :joined_rooms, through: :joinables, source: :room
 
+  validates_uniqueness_of :username,
+                          required:true,
+                          case_sensitive: false
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 
   has_many :notification_mentions, as: :record, dependent: :destroy, class_name: "Noticed::Event"

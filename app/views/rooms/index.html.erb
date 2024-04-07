@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "appearance_channel" %>
 <div id="appearance_channel"></div>
-
+<%= audio_tag "aim.wav", id: "audio-tag"%>
   <%= turbo_frame_tag "flash" do %>
    <%= render "shared/message_error" %>
   <% end %>
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class='ms-2 me-auto username'>
-        <%= link_to current_user.email, current_user, class: "msg-role-#{current_user.role}"%>
+        <%= link_to current_user.username, current_user, class: "msg-role-#{current_user.role}"%>
       </div>
     </li>
     <h4> Users </h4>
@@ -34,7 +34,7 @@
   <div id="room_container" class="col-md-9 col-sm-9 bg-dark text-light">
     <% if @single_room %>
       <div id="single_room">
-        <h4 class="text-center"> <%= @user&.email || @single_room.name %> </h4>
+        <h4 class="text-center"> <%= @user&.username || @single_room.name %> </h4>
         <%= turbo_stream_from @single_room %>
         <div id="messages" data-controller="scroll">
           <!-- Initialize a Turbo Frame tag named "page_handler". Turbo Frames handle partial page updates in Turbo-enabled Rails applications. -->

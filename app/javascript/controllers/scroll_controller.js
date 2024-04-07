@@ -42,6 +42,9 @@ export default class extends Controller {
         if (this.messages.scrollTop > upperScrollThreshold){
             this.messages.scrollTop = this.messages.scrollHeight - this.messages.clientHeight;
         }
+        const audio_tag = document.getElementById("audio-tag");
+        audio_tag.play();
+
     }
     /** Function to reset scroll position without considering a threshold */
     resetScrollWithoutThreshold(messages){
