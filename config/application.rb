@@ -11,6 +11,10 @@ module Turbochat
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
+    config.action_view.sanitized_allowed_tags = Loofah::HTML5::SafeList::ALLOWED_ELEMENTS
+    config.action_view.sanitized_allowed_attributes = Loofah::HTML5::SafeList::ACCEPTABLE_ATTRIBUTES
+    
+
     # After Rails initialization, set the status of all users to "offline".
     # This ensures that all users start with an initial status when the application starts.
     # The status value is retrieved from the User model's statuses enum.
