@@ -38,6 +38,15 @@ class UsersController < ApplicationController
     render 'rooms/index'
   end
 
+  def search
+    if params[:username_query]
+      @users = User.where('username ILIKE ?', "%#{params[:username_query]}%")
+      render json: @users, only: [:id, :username] # Customize as needed
+    else
+      render json: []
+    end
+  end
+
   
   
   

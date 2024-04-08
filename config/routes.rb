@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   
   # Define a route for accessing user profiles
   get 'user/:id', to: 'users#show', as: 'user'
-  
+  get 'users/search', to: 'users#search'
   
   # Route to reveal the health status of the application
   get "up" => "rails/health#show", as: :rails_health_check
