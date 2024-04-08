@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+    include MessagesHelper
+  
     before_action :set_message, only: [:destroy, :edit, :update]
     def create
       # Create a new message associated with the current user
@@ -7,6 +9,9 @@ class MessagesController < ApplicationController
       room_id: params[:room_id],
       attachments: msg_params[:attachments]
       )
+
+      @message.body = parse_at_mentions(@message.body)
+
       unless @message.save
         render turbo_stream:
           turbo_stream.update('flash', partial: "shared/message_error", locals: {message: @message.errors.full_messages.join(", ")})
