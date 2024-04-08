@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_action :recent_messages, only: [:home]
   def home
     recent_messages
+    @online_users = User.where.not(status: User.statuses[:offline]).count
   end
 
   private
