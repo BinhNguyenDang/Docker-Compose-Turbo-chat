@@ -25,6 +25,21 @@
           <%= f.text_field :username, required: true, class: "form-control" %>
         </div>
 
+        <div class="mb-3">
+          <%= f.label :firstname, class: "form-label" %>
+          <%= f.text_field :firstname, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :lastname, class: "form-label" %>
+          <%= f.text_field :lastname, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :birthday, class: "form-label" %>
+          <%= f.date_field :birthday, class: "form-control", type: "date" %>
+        </div>
+
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div class="mb-3 text-muted">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
