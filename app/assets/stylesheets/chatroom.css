@@ -169,3 +169,8 @@
     opacity: 0;
   }
 }
+
+.mic-icon{
+  font-size: 1.5rem;
+  cursor: pointer;
+}

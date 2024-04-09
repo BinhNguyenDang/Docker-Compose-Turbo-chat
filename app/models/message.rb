@@ -60,12 +60,12 @@ class Message < ApplicationRecord
   def validate_attachment_filetypes
     return unless attachments.attached?
   
-    allowed_content_types = %w[image/jpeg image/png image/gif video/mp4 video/mpeg audio/x-wav audio/mpeg video/quicktime]
+    allowed_content_types = %w[image/jpeg image/png image/gif video/mp4 video/mpeg audio/x-wav audio/mpeg audio/webm video/quicktime]
     max_size = 10.megabytes
   
     attachments.each do |attachment|
       unless attachment.content_type.in?(allowed_content_types)
-        errors.add(:attachments, "must be a MOV, JPEG, PNG, GIF, MP4, MP3, OR WAV file")
+        errors.add(:attachments, "must be a MOV, JPEG, PNG, GIF, MP4, MP3, WEBM, OR WAV file")
       end
   
       if attachment.blob.byte_size > max_size
