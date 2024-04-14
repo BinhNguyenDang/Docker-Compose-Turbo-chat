@@ -93,6 +93,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (5.0.6)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -109,6 +110,8 @@ GEM
     erubi (1.12.0)
     ffi (1.16.3)
     globalid (1.2.1)
+      activesupport (>= 6.1)
+    groupdate (6.4.0)
       activesupport (>= 6.1)
     hirb (0.7.3)
     i18n (1.14.1)
@@ -265,8 +268,10 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   capybara
+  chartkick (~> 5.0)
   devise (~> 4.9)
   devise-bootstrap-views (~> 1.0)
+  groupdate (~> 6.4)
   hirb
   image_processing (~> 1.2)
   importmap-rails

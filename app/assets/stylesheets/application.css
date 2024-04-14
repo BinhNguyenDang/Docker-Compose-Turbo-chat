@@ -26,7 +26,7 @@ body {
 }
 
 #jumbotron{
-  animation: fadeIn 1s;
+  animation: slideInLeft 1s;
   background: linear-gradient(to right, #343a40, #000000);
   background-position: center center;
   background-repeat: no-repeat;
@@ -35,7 +35,7 @@ body {
 }
 
 #single_room {
-  animation: fadeIn 1s;
+  animation: slideInRight 0.5s;
   height: calc(100vh - 150px);
   background-color: #000000;
 }
@@ -55,6 +55,7 @@ body {
   overflow-y: auto;
   padding-left: 2em;
   background-color: #000000;
+  
 }
 #chatroom_container {
   height: calc(100vh - 56px);
@@ -150,16 +151,61 @@ body {
   border-radius: 0px !important;
 }
 #message-preview-card{
-  animation: fadeIn 2s;
+  animation: flipInX 2s;
   background: #222; 
   border-radius:0px;
   border-top: 200px;
 }
-@keyframes fadeIn{
-  from{
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
     opacity: 0;
   }
-  to{
+  to {
+    transform: translateX(0);
     opacity: 1;
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipInX {
+  from {
+    transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  40% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    animation-timing-function: ease-in;
+  }
+  60% {
+    transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+    opacity: 1;
+  }
+  80% {
+    transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+  }
+  to {
+    transform: perspective(400px);
   }
 }

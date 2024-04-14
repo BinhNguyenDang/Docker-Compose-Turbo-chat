@@ -10,3 +10,5 @@ pin_all_from "app/javascript/channels", under: "channels"
 pin "stimulus-use" # @0.52.2
 pin "mention", to: "mention.js"
 pin "@rails/activestorage", to: "activestorage.esm.js"
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"

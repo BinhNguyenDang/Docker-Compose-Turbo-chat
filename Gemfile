@@ -78,3 +78,7 @@ gem "pagy", "~> 6.5"
 gem "noticed", "~> 2.2"
 
 gem "redcarpet", "~> 3.6"
+
+gem "chartkick", "~> 5.0"
+
+gem "groupdate", "~> 6.4"

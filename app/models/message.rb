@@ -53,6 +53,10 @@ class Message < ApplicationRecord
     self.user == Current.user || Current.user.admin? 
   end
 
+  def self.messages_this_month
+    messages = Message.group_by_day(:created_at, range: 1.month.ago..Time.now).count
+  end
+
 
   private
 
