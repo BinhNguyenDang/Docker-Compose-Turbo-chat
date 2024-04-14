@@ -41,7 +41,7 @@ class User < ApplicationRecord
  
   # Define an enumeration for user status with three possible values: offline, away, and online
   # Rails creates a method called statuses on the User model, which returns a hash-like object. This object maps each enum value (e.g., :offline, :away, :online) to its corresponding integer value.
-  enum status: %i[offline away online]
+  enum status: %i[offline away online dnd]
 
   # This line sets up a callback to ensure that whenever a new instance of the User model is initialized,
   # the set_default_role method is called to assign a default role to the user if one is not already assigned.
@@ -80,6 +80,8 @@ class User < ApplicationRecord
       'bg-warning'
     when 'offline'
       'bg-dark'
+    when 'dnd'
+      'bg-danger'
     else
       'bg-dark'
     end
