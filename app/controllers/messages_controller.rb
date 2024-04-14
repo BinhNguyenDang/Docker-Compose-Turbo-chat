@@ -6,11 +6,11 @@ class MessagesController < ApplicationController
     before_action :set_commands
     def create
       # Create a new message associated with the current user
-      @message = current_user.messages.create(
+      @message = Message.new(
       body: msg_params[:body],
       room_id: params[:room_id],
       attachments: msg_params[:attachments],
-      
+      user_id: current_user.id
       )
 
       @message.body = parse_at_mentions(@message.body)
