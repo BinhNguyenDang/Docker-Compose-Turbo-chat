@@ -5,13 +5,13 @@
         <% if attachment.image? %>
           <!-- Image with Modal Trigger -->
           <div class="message-image-container">
-            <%= link_to "#imageModal#{index}", data: { bs_toggle: "modal" } do %>
+            <%= link_to "#imageModal#{message.id}#{index}", data: { bs_toggle: "modal" } do %>
               <%= image_tag(message.chat_attachment(index), class: "message-image") %>
             <% end %>
           </div>
           
           <!-- Modal Structure -->
-          <div class="modal fade" id="imageModal<%= index %>" tabindex="-1" aria-labelledby="imageModalLabel<%= index %>" aria-hidden="true">
+          <div class="modal fade" id="imageModal<%= message.id %><%= index %>" tabindex="-1" aria-labelledby="imageModalLabel<%= index %>" aria-hidden="true">
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
                 <div class="modal-body">
