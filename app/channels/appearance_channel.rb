@@ -41,6 +41,7 @@ class AppearanceChannel < ApplicationCable::Channel
 
   # Updates the current user's status and broadcasts the new status to all subscribers.
   def broadcast_new_status(status)
-    current_user.update!(status: status)
+    target_user = User.find_by(id: current_user.id)
+    current_user.update!(status: status) unless target_user.dnd?
   end
 end

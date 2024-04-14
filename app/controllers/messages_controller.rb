@@ -1,19 +1,22 @@
 class MessagesController < ApplicationController
     include MessagesHelper
+    include MessageParser
   
     before_action :set_message, only: [:destroy, :edit, :update]
     before_action :set_commands
     def create
       # Create a new message associated with the current user
-      @message = current_user.messages.create(
+      @message = Message.new(
       body: msg_params[:body],
       room_id: params[:room_id],
-      attachments: msg_params[:attachments]
+      attachments: msg_params[:attachments],
+      user_id: current_user.id
       )
 
       @message.body = parse_at_mentions(@message.body)
 
       parse_slash_commands(@message.body)
+  
 
       unless @message.save
         render turbo_stream:
@@ -21,48 +24,7 @@ class MessagesController < ApplicationController
       end
     end
 
-    def parse_slash_commands(message)
-      if message.start_with?('/')
-        command = message.split(' ')
-        role_manager(command)
-        random_manager(command)
-        help_manager(command)
-      end
-    end
-
-    def role_manager(command)
-      if command[0] == @role
-        return unless current_user
-        return unless current_user.admin?
-
-        target_username = command[1]
-        target_role = command[2]
-        target_user = User.find_by(username: target_username)
-        role = User.roles[target_role]
-
-        @message.body += "=> Assigned #{target_user.username} as #{target_role} \n"
-        target_user.update(role:) if target_user && role
-      end
-    end
-
-    def random_manager(command)
-      if command[0] == @random
-        lower_bound = command[1].to_i
-        upper_bound = command[2].to_i
-        random_number = rand(lower_bound..upper_bound)
-        @message.body += "=> Rolled between #{lower_bound} and #{upper_bound}. Got: #{random_number}"
-      end
-    end
-
-    def help_manager(command)
-      if command[0] == @help
-         result = "\n"
-         @command_options.each do |com|
-           result += "\n#{com[0]} - #{com[1]}\n"
-         end
-      @message.body += result
-      end
-    end
+  
 
     def destroy
       @room = Room.find(params[:room_id])
@@ -100,19 +62,6 @@ class MessagesController < ApplicationController
     
     
     private
-
-    def set_commands
-      @role = '/role'
-      @random = '/random'
-      @help = '/help'
-
-      @command_options = {
-        @role => '[username] [role]',
-        @random => '[lower_bound] [upper_bound]',
-        @help => '[command]'
-      }
-    end
-    
     # Strong parameters method to ensure only permitted attributes are allowed
     def msg_params
       params.require(:message).permit(:body, attachments: [], remove_attachments: [])

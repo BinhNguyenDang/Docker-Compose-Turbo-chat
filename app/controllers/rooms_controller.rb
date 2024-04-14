@@ -122,6 +122,7 @@ include RoomsHelper
   private
   # Set the user's status to 'online' before any action
   def set_status
+    return if current_user.dnd?
     current_user.update!(status: User.statuses[:online]) if current_user
   end
 
