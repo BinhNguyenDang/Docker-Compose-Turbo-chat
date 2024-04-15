@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
           <% if current_user %>
             <li class="nav-item dropdown">
@@ -15,7 +15,7 @@
                 Your Profile
               </a>
               <ul class="dropdown-menu">
-                <%= link_to "Start Chatting", rooms_path, class: "dropdown-item" %>
+                <li><%= link_to "Profile", profile_path(current_user), class:"dropdown-item"%></li>
                 <li><hr class="dropdown-divider"></li>
                 <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
               </ul>

@@ -1,3 +1,6 @@
+#chart{
+  animation: slideUpFromBottom 1.5s ease-out forwards;
+}
 .container.bootstrap.snippets.bootdey.mt-4 {
     background: white;
     animation: fadeIn 1s;
@@ -92,6 +95,17 @@
     }
     to {
       transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUpFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
       opacity: 1;
     }
   }
