@@ -16,7 +16,7 @@
 
 
 
-body {
+ body {
   height: calc(100vh - 56px);
 }
 .msg-form {
@@ -32,6 +32,9 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   height: 500px;
+}
+#filler{
+  animation: slideInLeft 2s;
 }
 
 #single_room {

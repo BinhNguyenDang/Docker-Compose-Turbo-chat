@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    @dashboard = @user.messages.group_by_day(:created_at, range: 1.month.ago..Time.now).count
   end
 
   
