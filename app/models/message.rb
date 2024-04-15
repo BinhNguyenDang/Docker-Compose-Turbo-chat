@@ -6,6 +6,8 @@ class Message < ApplicationRecord
   belongs_to :room
   has_many_attached :attachments, dependent: :purge_later
 
+  @@not_resizables = %w[image/gif]
+
   validate :validate_attachment_filetypes
 
   # Defines a callback to broadcast a message after a new message is created
@@ -25,6 +27,7 @@ class Message < ApplicationRecord
   def chat_attachment(index)
     target = attachments[index]
     return unless attachments.attached?
+    return target if @@not_resizables.include?(target.content_type)
 
     if target.image?
       target.variant(resize_to_limit: [150, 150]).processed
