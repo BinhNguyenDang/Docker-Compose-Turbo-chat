@@ -13,9 +13,9 @@ class MessagesController < ApplicationController
       user_id: current_user.id
       )
 
-      @message.body = parse_at_mentions(@message.body)
+      @message.body = parse_at_mentions(@message)
 
-      parse_slash_commands(@message.body)
+      parse_slash_commands(@message)
   
 
       unless @message.save

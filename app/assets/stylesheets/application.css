@@ -52,6 +52,7 @@
   margin-right: 0px !important;
 }
 #side_panel {
+  animation: fadeIn 1s;
   height: calc(100vh - 56px);
   margin-right: 0px !important;
   overflow-x: hidden;
@@ -210,5 +211,13 @@
   }
   to {
     transform: perspective(400px);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
