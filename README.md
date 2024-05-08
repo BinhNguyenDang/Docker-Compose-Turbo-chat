@@ -107,11 +107,28 @@ The application will be accessible at `http://localhost:3000`.
 
 ## Demo
 
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/a52bbac1-4501-472a-94a0-81524fb89ec2)
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/e89e8f30-a8b6-4ea7-aa49-bb474c6919ad)
 
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/d42ab212-1b8c-45b7-937b-7d84e9d9e5fd)
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/22375a9f-eb78-475b-ac8d-260de1d3aaf6)
 
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/25a8382f-ec0c-4ec0-80b4-0f57812147bc)
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/6a7ed1db-4411-4207-8c24-166ce10fd8c1)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/5470958e-3d8f-4f11-8fb3-b9bd556a8a1a)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/17539c77-e14d-40b1-a468-e281b30116cc)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/d0f76f50-a899-4071-b4ee-81d7257b2be0)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/2eda7669-7a94-471e-a9c8-6e5b56e2331f)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/f56c3d05-5d5e-4f9a-9d5e-3565d52d2c3a)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/5569dbd9-281f-459f-805a-8604667d0be2)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/7f503f87-a2c6-4a32-95c2-9b7d4b798ed4)
+
+![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/f3d53f98-37bd-4f15-95a7-bead293be88c)
+
 
 
 
