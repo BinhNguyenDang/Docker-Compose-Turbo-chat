@@ -4,10 +4,15 @@
 
 - Real-time Messaging: Utilizes Turbo and Stimulus to provide users with instant messaging capabilities, ensuring fast and responsive communication.
 - Chatrooms and Direct Messaging: Users can engage in both group conversations through chatrooms and one-on-one conversations via direct messaging.
+- Voice Record function.
 - User Status: Displays user status indicators to show availability or activity, enhancing the overall messaging experience.
 - ActiveStorage Integration: Implemented ActiveStorage for user avatar and attachment capabilities, allowing users to personalize their profiles and share files seamlessly.
 - Search and Joinable Rooms: Users can easily search for and join existing chatrooms, facilitating community engagement and collaboration.
 - Admin Functionality: Admin users have the ability to create chatrooms, manage user permissions, and moderate conversations as needed, ensuring a safe and organized messaging environment.
+- In chat command function.
+- Admin Dashboard with graphing of daily messages.
+- User basic info page and recent activities displayed. 
+  
 
 ## Prerequisites
 
