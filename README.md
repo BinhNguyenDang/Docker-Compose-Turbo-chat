@@ -1,5 +1,9 @@
 # Turbochat
 
+
+https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/b44c4a06-5c43-4b8b-ad67-e0be8f68b250
+
+
 ## Features
 
 - Real-time Messaging: Utilizes Turbo and Stimulus to provide users with instant messaging capabilities, ensuring fast and responsive communication.
