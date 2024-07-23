@@ -65,4 +65,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./wait-for-it.sh", "db:5432", "--", "./bin/rails", "server", "-b", "0.0.0.0"]
+CMD ["./wait-for-it.sh", "db:5432", "--", "sh", "-c", "./setup_credentials.sh && ./bin/rails server -b 0.0.0.0"]
