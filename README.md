@@ -3,6 +3,59 @@
 ## Demo
 https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/b44c4a06-5c43-4b8b-ad67-e0be8f68b250
 
+# How to Set Up and Run the Application
+This guide provides step-by-step instructions for cloning the application repository and running it using Docker Compose.
+## Prerequisites
+Make sure you have Docker and Docker Compose installed on your machine.
+- Docker: https://docs.docker.com/engine/install/ubuntu/ (Example for ubuntu).
+- Docker Compose: https://docs.docker.com/compose/install/
+## Steps to Clone and Run the Application
+1. Clone the Repository
+First, clone the repository to your local machine using git:
+```
+git clone https://github.com/BinhNguyenDang/Docker-Compose-Turbo-chat.git
+cd Docker-Compose-Turbo-chat
+```
+2. Build the Docker Images
+Navigate to the root directory of the cloned repository and build the Docker images:
+```
+docker-compose build
+```
+![image](https://github.com/user-attachments/assets/4ff0bb79-f9f8-4eff-bc8a-2ce09a66e875)
+
+3. Start the Services
+Start the services defined in the docker-compose.yml file:
+```
+docker-compose up 
+```
+![image](https://github.com/user-attachments/assets/5cd87f39-10d4-4d05-8f04-3d1c2934db6c)
+Or ( The -d flag runs the services in the background.)
+```
+docker-compose up -d
+```
+4. Access the Application
+Once the services are running, you can access the application. For example, if your application runs a web server, open your web browser and go to:
+```
+http://localhost:3000
+```
+5. Stopping the Services
+To stop the services without removing containers, networks, and volumes
+```
+crtl + c
+```
+![image](https://github.com/user-attachments/assets/5e7e6b58-b6fc-4c5b-a9bd-ac91002c6bb2)
+
+To stop the services and remove the containers, networks, and volumes created by docker-compose up, run:
+```
+docker-compose down
+```
+![image](https://github.com/user-attachments/assets/f4c4de7d-cdf4-4333-a08d-9b4fe5342334)
+
+Note: 
+Rebuilding Images: If you make changes to your Dockerfiles or dependencies, rebuild the images:
+```
+docker compose build
+```
 ## Database
 ```mermaid
 erDiagram
@@ -223,128 +276,6 @@ erDiagram
 - Admin Dashboard with graphing of daily messages.
 - User basic info page and recent activities displayed. 
   
-
-## Prerequisites
-
-Before getting started, ensure that you have the following installed:
-
-- Ruby (version 3.3.0)
-- Rails (version 7.1.3 or higher)
-- PostgreSQL (with appropriate configurations)
-- Yarn
-
-## Installation
-
-1. Clone this repository to your local machine:
-```yaml
-git clone <repository-url>
-```
-2. Navigate into the project directory:
-```yaml
-cd Demo-Turbochat
-```
-3. Install the required Ruby gems:
-```yaml
-bundle install
-```
-4. Install JavaScript dependencies:
-```yaml
-yarn install
-```
-5. Remove the existing credentials file if it exists:
-```yaml
-rm config/credentials.yml.enc
-```
-6. Run the following command in your terminal to create a new encrypted credentials file:
-```yaml
-rails credentials:edit
-```
-This will open the credentials file in your default editor.
-
- Open the encrypted credentials file by running the following command in your terminal:
-
-   ```bash
-   EDITOR="code --wait" rails credentials:edit
-```
-7. Update the `DB_NAME`, `DB_USERNAME`, and `DB_PASSWORD` values for the development, test, and production environments in the credentials file with this structure.
-
-## Database Credentials
-
-```yaml
-DB_NAME:
-  dev_db: turbo_dev1
-  test_db: turbo_test1
-  prod_db: turbo_prod1
-DB_USERNAME:
-  dev_db: turbo_dev1
-  test_db: turbo_test1
-  prod_db: turbo_prod1
-DB_PASSWORD:
-  dev_db: password123
-  test_db: password1234
-  prod_db: password12345
-```
-Once you've updated the database credentials, configured the database connection, and created the necessary databases, you're ready to run the application. Start by launching the Rails console:
-```yaml
-rails console
-```
-Then, launch the PostgreSQL command line interface:
-```yaml
-psql
-```
-Within the PostgreSQL command line interface, create the required databases for turbo_dev1 and turbo_test1 (depending on your credentials edit):
-```yaml
-CREATE user turbo_dev1 WITH PASSWORD 'password123';
-CREATE user turbo_test1 WITH PASSWORD 'password123';
-ALTER turbo_dev1 WITH CREATEDB;
-ALTER turbo_test1 WITH CREATEDB;
-```
-After creating the databases, you can exit the PostgreSQL command line interface:
-```yaml
-\q
-```
-Before starting the application, ensure that you have created the databases for development and testing environments. Run the following commands in your terminal:
-```yaml
-rails db:create
-```
-Then: 
-```yaml
-rails db:migrate
-```
-
-## Running the Application
-
-To start the Rails server, run the following command:
-```yaml
-rails s
-```
-- The application will be accessible at `http://localhost:3000`.
-- Database Preview will be acessible at `http://localhost:3000/erd/index.html`
-
-## App Image
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/e89e8f30-a8b6-4ea7-aa49-bb474c6919ad)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/22375a9f-eb78-475b-ac8d-260de1d3aaf6)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/6a7ed1db-4411-4207-8c24-166ce10fd8c1)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/5470958e-3d8f-4f11-8fb3-b9bd556a8a1a)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/17539c77-e14d-40b1-a468-e281b30116cc)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/d0f76f50-a899-4071-b4ee-81d7257b2be0)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/2eda7669-7a94-471e-a9c8-6e5b56e2331f)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/f56c3d05-5d5e-4f9a-9d5e-3565d52d2c3a)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/5569dbd9-281f-459f-805a-8604667d0be2)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/7f503f87-a2c6-4a32-95c2-9b7d4b798ed4)
-
-![image](https://github.com/BinhNguyenDang/Demo-Turbochat/assets/146049423/f3d53f98-37bd-4f15-95a7-bead293be88c)
-
 
 
 
